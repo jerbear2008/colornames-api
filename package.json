@@ -1,0 +1,28 @@
+{
+  "dependencies": {
+    "typescript": "^4.6.4"
+  },
+  "name": "colornames-api",
+  "version": "1.0.0",
+  "description": "Access colornames.org through node.",
+  "main": "index.js",
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jerbear2008/colornames-api.git"
+  },
+  "keywords": [
+    "color",
+    "colornames",
+    "api"
+  ],
+  "author": "jerbear2008",
+  "license": "MPL-2.0",
+  "bugs": {
+    "url": "https://github.com/jerbear2008/colornames-api/issues"
+  },
+  "homepage": "https://github.com/jerbear2008/colornames-api#readme"
+}
