@@ -1,14 +1,13 @@
 {
-  "dependencies": {
-    "typescript": "^4.6.4"
-  },
   "name": "colornames-api",
   "version": "1.0.0",
   "description": "Access colornames.org through node.",
-  "main": "index.js",
-  "devDependencies": {},
+  "main": "./out/index.js",
+  "type": "module",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "compile": "tsc",
+    "start": "tsc && node .",
+    "test": "tsc && node out/test.js"
   },
   "repository": {
     "type": "git",
@@ -24,5 +23,12 @@
   "bugs": {
     "url": "https://github.com/jerbear2008/colornames-api/issues"
   },
-  "homepage": "https://github.com/jerbear2008/colornames-api#readme"
+  "homepage": "https://github.com/jerbear2008/colornames-api#readme",
+  "dependencies": {
+    "node-fetch": "^3.2.4"
+  },
+  "devDependencies": {
+    "ts-node": "^10.7.0",
+    "typescript": "^4.8.0-dev.20220513"
+  }
 }
