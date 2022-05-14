@@ -1,18 +1,17 @@
 import { latest, random, lookup } from './index.js'
 import type { color } from './types.js'
 
-let array = (await latest()).slice(0, 3) as Array<color> // Get 3 latest names
+const latestColors = (await latest()).slice(0, 3)
+console.log(latestColors)
 
+let randomColors: Array<color> = []
 for (let i = 0; i < 3; i++) { // Get 3 random colors
-  array.push(await random())
-} 
-for (let hex of ['ffffff', '123456', '010101']) { // Lookup 3 colors
-  array.push(await lookup(hex))
+  randomColors.push(await random())
 }
+console.log(randomColors)
 
-let formatted = array.map(item => // Format each color nicley
-  `${item.name}${' '.repeat(30 - item.name.length)}` +
-  `https://colornames.org/color/${item.hexCode}`
-)
-
-console.log(formatted.join('\n'))
+let specificColors: Array<color> = []
+for (let hex of ['ffffff', '123456', '010101']) { // Lookup 3 colors
+  specificColors.push(await lookup(hex))
+}
+console.log(specificColors)
