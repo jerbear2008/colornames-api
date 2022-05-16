@@ -5,3 +5,16 @@ export type color = {
 export type name = color & {
   nameId: number,
 }
+
+export type nameID = number
+export type hex = string
+
+export type rawStats = {
+  colorCount: number,
+  nameCount: number,
+}
+export type stats = {
+  totalColors: number,
+  namedColors: number,
+  portionNamed: number,
+}
