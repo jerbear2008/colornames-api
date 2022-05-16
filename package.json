@@ -1,6 +1,6 @@
 {
   "name": "colornames-api",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Access colornames.org through node.",
   "main": "./out/index.js",
   "type": "module",
