@@ -3,7 +3,7 @@ export type color = {
   name: string,
 }
 export type name = color & {
-  nameId: number,
+  nameID: number,
 }
 
 export type nameID = number

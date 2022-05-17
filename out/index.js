@@ -1,12 +1,7 @@
 import fetch from 'node-fetch';
+import * as types from './types.js';
 export * from './types.js';
 const domain = 'https://colornames.org';
-export async function latest() {
-    const url = new URL('/fresh/json', domain);
-    const res = await fetch(url.href);
-    const array = await res.json();
-    return array;
-}
 export async function lookup(hex) {
     const url = new URL('/search/json', domain);
     url.searchParams.set('hex', hex);
@@ -19,6 +14,19 @@ export async function random() {
     const res = await fetch(url.href);
     const info = await res.json();
     return info;
+}
+export async function latest() {
+    const url = new URL('/fresh/json', domain);
+    const res = await fetch(url.href);
+    const rawArray = await res.json();
+    const array = rawArray.map(obj => {
+        return {
+            hexCode: obj.hexCode,
+            name: obj.name,
+            nameID: obj.nameId,
+        };
+    });
+    return array;
 }
 export async function nameCount(name) {
     const url = new URL('/ajax/nameCount/', domain);
@@ -43,10 +51,12 @@ export async function stats() {
     return stats;
 }
 function createVoter(type) {
-    return async function vote(nameID) {
+    return async function vote(name) {
+        if (typeof name === 'object')
+            name = name.nameID;
         const url = new URL(`/ajax/${type}/`, domain);
         const formData = new URLSearchParams();
-        formData.append('naming', String(nameID));
+        formData.append('naming', String(name));
         const res = await fetch(url.href, {
             method: 'POST',
             headers: {
@@ -61,13 +71,24 @@ function createVoter(type) {
             case 'Already voted':
                 return false;
             case 'Unable to determine color':
-                throw new Error(`NameID ${nameID} not found.`);
+                throw new Error(`NameID ${name} not found.`);
             case 'Vauge error':
             default:
-                throw new Error(`Tried to ${type} nameID ${nameID}, got an error: "${result}"`);
+                throw new Error(`Tried to ${type} nameID ${name}, got an error: "${result}"`);
         }
     };
 }
 export const upvote = createVoter('upvote');
 export const downvote = createVoter('downvote');
 export const report = createVoter('report');
+export default {
+    lookup,
+    random,
+    latest,
+    nameCount,
+    stats,
+    upvote,
+    downvote,
+    report,
+    ...types,
+};
