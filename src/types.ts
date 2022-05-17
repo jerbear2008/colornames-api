@@ -6,9 +6,6 @@ export type name = color & {
   nameID: number,
 }
 
-export type nameID = number
-export type hex = string
-
 export type rawStats = {
   colorCount: number,
   nameCount: number,

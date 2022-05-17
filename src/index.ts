@@ -65,7 +65,7 @@ export async function stats() {
 }
 
 function createVoter(type: 'upvote' | 'downvote' | 'report') {
-  return async function vote(name: types.nameID | types.name) {
+  return async function vote(name: number | types.name) {
     if (typeof name === 'object') name = name.nameID
     const url = new URL(`/ajax/${type}/`, domain)
     const formData = new URLSearchParams()
