@@ -112,9 +112,17 @@ const stats = await colornames.stats()
 ### `async upvote(name: number | name): boolean`
 ### `async downvote(name: number | name): boolean`
 ### `async report(name: number | name): boolean`
-Upvotes, downvotes, or reports a given name. Returns `true` if the vote was successful, `false` if a vote has already been cast on the color from the current IP address. If the `name` is invalid, an `InvalidNameError` will be thrown.
+Upvotes, downvotes, or reports a given name. Returns `true` if the vote was successful or `false` if a vote has already been cast on the color from the current IP address. If the `name` is invalid, an `InvalidNameError` will be thrown.
 ```ts
 const upvoteResult = await colornames.upvote(3938638)
 // example value:
 // -> true
+```
+
+### `async submitName(color: color | string, name: string)`
+Submits a name for a color. Returns `true` if the submission was successful ot `false` if the name had already been submitted.
+```ts
+const submitResult = await colornames.submitName('d47904', 'Rotten Jack O Lantern')
+// example value:
+// -> false
 ```

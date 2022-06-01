@@ -84,12 +84,13 @@ function createVoter(type: 'upvote' | 'downvote' | 'report') {
   return async function vote(name: number | types.name) {
     if (typeof name === 'object') name = name.nameID
     const url = new URL(`/ajax/${type}/`, domain)
-    const formData = new URLSearchParams()
-    formData.append('naming', String(name))
+    const formData = new URLSearchParams({
+      naming: String(name),
+    })
     const res = await fetch(url.href, {
       method: 'POST',
       headers: {
-        referer: domain
+        referer: domain,
       },
       body: formData,
     })
@@ -103,13 +104,36 @@ function createVoter(type: 'upvote' | 'downvote' | 'report') {
         throw new InvalidNameError(name)
       case 'Vauge error':
       default:
-        throw new Error(`Tried to ${type} nameID ${name}, got an error: "${result}"`)
+        throw new ColornamesError(`Tried to ${type} nameID ${name}, got an error: "${result}"`)
     }
   }
 }
 export const upvote = createVoter('upvote')
 export const downvote = createVoter('downvote')
 export const report = createVoter('report')
+
+export async function submitName(color: types.color | string, name: string) {
+  if (typeof color === 'object') color = color.hexCode
+  const url = new URL('/ajax/submit/', domain)
+  const formData = new URLSearchParams({
+    colorId: String(parseInt(color, 16) + 1),
+    proposedName: name,
+  })
+  const res = await fetch(url.href, {
+    method: 'POST',
+    headers: {
+      referer: domain,
+    },
+    body: formData,
+  })
+  const result = await res.text()
+  
+  const successRegex = /Thanks! This color will now be known as/
+  if (successRegex.test(result)) return true
+  const duplicateRegex = /Error: that name has already been proposed for this color\./
+  if (duplicateRegex.test(result)) return false
+  throw new ColornamesError(`Tried to submit "${name}" as a name for the color ${color},  got an error: "${result}"`)
+}
 
 export default {
   lookup,
@@ -120,6 +144,7 @@ export default {
   upvote,
   downvote,
   report,
+  submitName,
   ColornamesError,
   InvalidNameError,
   ...types,

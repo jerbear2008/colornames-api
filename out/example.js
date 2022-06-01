@@ -11,4 +11,3 @@ const upvoteResult = true; // await colornames.upvote(latest) // avoid actually 
 console.log(upvoteResult ? 'upvoted' : 'failed to upvote', latest);
 // example output:
 // -> upvoted { hexCode: 'b9484b', name: 'Stale Cherry', nameID: 4256977 }
-console.log(JSON.stringify(white));

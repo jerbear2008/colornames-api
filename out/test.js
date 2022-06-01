@@ -18,4 +18,5 @@ const percent = stats.portionNamed * 100;
 console.log(`${percent}% of all colors have been named.`);
 const upvoteResult = await colornames.upvote(3938638 /* #d47904 */); // Upvote a name
 console.log(`Upvote color succeeded: ${upvoteResult}`);
-console.log(stats);
+const submitResult = await colornames.submitName('d47904', 'Rotten Jack O Lantern');
+console.log(`Submit name succeeded: ${submitResult}`);
