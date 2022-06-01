@@ -3,6 +3,13 @@ import * as types from './types.js'
 export * from './types.js'
 const domain = 'https://colornames.org'
 
+export class ColornamesError extends Error {
+  constructor(message: string) {
+    super(message)
+    this.name = this.constructor.name
+  }
+}
+
 export async function lookup(hex: string) {
   const url = new URL('/search/json', domain)
   url.searchParams.set('hex', hex)
@@ -55,7 +62,10 @@ export async function stats() {
   const url = new URL('/ajax/stats.json', domain)
   const res = await fetch(url.href)
   
-  const raw = await res.json() as types.rawStats
+  const raw = await res.json() as {
+    colorCount: number,
+    nameCount: number,
+  }
   const stats = {
     totalColors: raw.colorCount,
     namedColors: raw.nameCount,
@@ -64,10 +74,9 @@ export async function stats() {
   return stats
 }
 
-export class InvalidNameError extends Error {
+export class InvalidNameError extends ColornamesError {
   constructor(nameID: number) {
     super(`NameID ${nameID} not found.`)
-    this.name = this.constructor.name
   }
 }
 
@@ -111,6 +120,7 @@ export default {
   upvote,
   downvote,
   report,
+  ColornamesError,
   InvalidNameError,
   ...types,
 }

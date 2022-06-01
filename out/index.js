@@ -2,6 +2,12 @@ import fetch from 'node-fetch';
 import * as types from './types.js';
 export * from './types.js';
 const domain = 'https://colornames.org';
+export class ColornamesError extends Error {
+    constructor(message) {
+        super(message);
+        this.name = this.constructor.name;
+    }
+}
 export async function lookup(hex) {
     const url = new URL('/search/json', domain);
     url.searchParams.set('hex', hex);
@@ -50,10 +56,9 @@ export async function stats() {
     };
     return stats;
 }
-export class InvalidNameError extends Error {
+export class InvalidNameError extends ColornamesError {
     constructor(nameID) {
         super(`NameID ${nameID} not found.`);
-        this.name = this.constructor.name;
     }
 }
 function createVoter(type) {
@@ -96,6 +101,7 @@ export default {
     upvote,
     downvote,
     report,
+    ColornamesError,
     InvalidNameError,
     ...types,
 };
