@@ -64,6 +64,13 @@ export async function stats() {
   return stats
 }
 
+export class InvalidNameError extends Error {
+  constructor(nameID: number) {
+    super(`NameID ${nameID} not found.`)
+    this.name = this.constructor.name
+  }
+}
+
 function createVoter(type: 'upvote' | 'downvote' | 'report') {
   return async function vote(name: number | types.name) {
     if (typeof name === 'object') name = name.nameID
@@ -84,7 +91,7 @@ function createVoter(type: 'upvote' | 'downvote' | 'report') {
       case 'Already voted':
         return false
       case 'Unable to determine color':
-        throw new Error(`NameID ${name} not found.`)
+        throw new InvalidNameError(name)
       case 'Vauge error':
       default:
         throw new Error(`Tried to ${type} nameID ${name}, got an error: "${result}"`)
@@ -104,5 +111,6 @@ export default {
   upvote,
   downvote,
   report,
+  InvalidNameError,
   ...types,
 }
