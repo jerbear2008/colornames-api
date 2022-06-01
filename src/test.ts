@@ -24,3 +24,5 @@ console.log(`${percent}% of all colors have been named.`)
 
 const upvoteResult = await colornames.upvote(3938638/* #d47904 */) // Upvote a name
 console.log(`Upvote color succeeded: ${upvoteResult}`)
+
+console.log(stats)
