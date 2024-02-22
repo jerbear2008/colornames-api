@@ -1,0 +1,22 @@
+{
+  "name": "@jer/colornames",
+  "version": "2.0.0",
+  "description": "Use the colornames API for crowdsourced names for hex colors",
+  "license": "MIT",
+  "author": "jerbear4328",
+
+  "repository": "https://github.com/jerbear2008/colornames-api",
+
+  "tasks": {
+    "build": "deno run --allow-read --allow-write --allow-env scripts/build.ts"
+  },
+
+  "fmt": {
+    "singleQuote": true,
+    "semiColons": false
+  },
+  "exclude": ["npm"],
+
+  "exports": "./src/index.ts",
+  "npmPackage": "colornames-api"
+}
