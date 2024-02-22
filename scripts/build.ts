@@ -36,7 +36,7 @@ await build({
     Deno.writeTextFileSync(
       'npm/README.md',
       Deno.readTextFileSync('README.md').replace(
-        ` from '${denoJson.name}'`,
+        ` from 'jsr:${denoJson.name}'`,
         ` from '${denoJson.npmPackage}'`,
       ),
     )

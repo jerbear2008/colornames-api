@@ -3,6 +3,9 @@ export type { color, name, statsInfo } from './types.ts'
 
 const domain = 'https://colornames.org'
 
+/**
+ * Generic error when using the colornames API.
+ */
 export class ColornamesError extends Error {
   constructor(message: string) {
     super(message)
@@ -51,7 +54,8 @@ export async function latest(): Promise<name[]> {
 
 /**
  * Gets many colors the given name has been proposed for.
- * Note: Often undercounts, but it is reliable to see if a name has already been proposed.
+ * **Note**: Very often undercounts, but it is reliable to see if a name has already
+ * been proposed.
  * @param name Name to check
  * @returns Number of colors with that name
  */

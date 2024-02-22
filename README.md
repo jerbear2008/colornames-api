@@ -13,8 +13,13 @@ color.name // -> 'Red'
 const randomColor = await colornames.random()
 // -> { hexCode: 'e44c4a', name: 'Makes Me Hungry Orange' }
 
-const latest = (await colornames.latest())[0]
-// -> { hexCode: 'b9484b', name: 'Stale Cherry', nameID: 4256977 }
+const latest = await colornames.latest()
+console.log(`#${latest[0].hexCode}: ${latest[0].name}`)
+// -> #b9484b: Stale Cherry
+
+const count = await colornames.nameCount('Lemonhead Yellow')
+console.log(`Lemonhead Yellow has been proposed ${count} times.`)
+// -> Lemonhead Yellow has been proposed 2 times.
 ```
 
 All functions and types have JSDoc comments, hover over them in your editor or
