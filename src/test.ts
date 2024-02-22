@@ -1,4 +1,4 @@
-import * as colornames from './index.ts'
+import * as colornames from './mod.ts'
 
 function assert(condition: unknown, msg?: string): asserts condition {
   if (!condition) {

@@ -7,7 +7,7 @@ const denoJson = JSON.parse(
 await emptyDir('./npm')
 
 await build({
-  entryPoints: ['./src/index.ts'],
+  entryPoints: ['./src/mod.ts'],
   outDir: './npm',
   shims: {
     deno: {

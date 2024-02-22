@@ -17,6 +17,6 @@
   },
   "exclude": ["npm"],
 
-  "exports": "./src/index.ts",
+  "exports": "./src/mod.ts",
   "npmPackage": "colornames-api"
 }
