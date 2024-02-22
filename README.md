@@ -25,7 +25,7 @@ console.log(`Lemonhead Yellow has been proposed ${count} times.`)
 All functions and types have JSDoc comments, hover over them in your editor or
 see the [documentation](https://jsr.io/@jer/colornames/doc) for more.
 
-# Links
+## Links
 
 - [Documentation](https://jsr.io/@jer/colornames/doc)
 - [GitHub](https://github.com/jerbear2008/colornames-api)
@@ -36,7 +36,7 @@ If you have any questions, feel free to send me a
 [Matrix](https://matrix.to/#/@jerbear:beeper.com) or
 [Discord](https://discord.gg/nJDk3s8Stp) (jerbear4328) message.
 
-# License
+## License
 
 This package is licensed under the
 [MIT License](https://github.com/jerbear2008/colornames-api/blob/main/LICENSE).
